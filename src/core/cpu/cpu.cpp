@@ -21,7 +21,7 @@ namespace Core
     V = 0;
     N = 0;
 
-    PC = 0;
     SP = 0xFF;
+    PC = 0xFFFC;
   }
 }
