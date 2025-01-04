@@ -1,5 +1,8 @@
 #include "cpu.hpp"
-#include <stdio.h>
+#include "opcodes.hpp"
+
+#include <iostream>
+
 namespace Core
 {
   CPU::CPU()
@@ -23,8 +26,21 @@ namespace Core
   {
     while (cycles > 0)
     {
+      std::cout << "Cycles: " << cycles << std::endl;
       Byte ins = step(mem, cycles);
-      printf("%02X\n", ins);
+
+      switch (ins)
+      {
+      case OpCode::LDA_IM:
+      {
+        mA = step(mem, cycles);
+
+        mFlags.Z = mA == 0;
+        mFlags.N = mA & 0b10000000 > 0;
+
+        break;
+      }
+      }
     }
   }
 

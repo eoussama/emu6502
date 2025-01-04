@@ -10,7 +10,6 @@ namespace Core
   public:
     PS();
 
-  private:
     Byte C : 1;      // 0: Carry Flag
     Byte Z : 1;      // 1: Zero Flag
     Byte I : 1;      // 2: Interrupt disable
