@@ -16,7 +16,7 @@ namespace Core
     void run(Mem &mem, Word cycles);
 
   private:
-    Byte step(Mem &mem, Word &cycles);
+    Byte stepByte(Mem &mem, Word &cycles);
     Byte peek(Mem &mem, Word &cycles, Word address);
 
     void setLDAStatus();

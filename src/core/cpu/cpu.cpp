@@ -25,13 +25,13 @@ namespace Core
   {
     while (cycles > 0)
     {
-      Byte ins = step(mem, cycles);
+      Byte ins = stepByte(mem, cycles);
 
       switch (ins)
       {
       case OpCode::LDA_IM:
       {
-        mA = step(mem, cycles);
+        mA = stepByte(mem, cycles);
         setLDAStatus();
 
         break;
@@ -39,7 +39,7 @@ namespace Core
 
       case OpCode::LDA_ZP:
       {
-        Byte zpAddress = step(mem, cycles);
+        Byte zpAddress = stepByte(mem, cycles);
         mA = peek(mem, cycles, zpAddress);
         setLDAStatus();
 
@@ -48,12 +48,17 @@ namespace Core
 
       case OpCode::LDA_ZPX:
       {
-        Byte zpxAddress = step(mem, cycles);
+        Byte zpxAddress = stepByte(mem, cycles);
         Byte address = mX + zpxAddress;
 
         mA = peek(mem, --cycles, address);
         setLDAStatus();
 
+        break;
+      }
+
+      case OpCode::JSR:
+      {
         break;
       }
 
@@ -66,7 +71,7 @@ namespace Core
     }
   }
 
-  Byte CPU::step(Mem &mem, Word &cycles)
+  Byte CPU::stepByte(Mem &mem, Word &cycles)
   {
     Byte data = mem[mPC++];
     cycles--;
