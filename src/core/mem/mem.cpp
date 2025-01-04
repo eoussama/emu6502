@@ -11,7 +11,7 @@ namespace Core
   {
     for (DWord i = 0; i < MAX_SIZE; i++)
     {
-      mData[i] = 0;
+      mData[i] = 0x00;
     }
   }
 
@@ -28,6 +28,12 @@ namespace Core
 
   // TODO: assert address is in range
   Byte Mem::operator[](DWord address) const
+  {
+    return mData[address];
+  }
+
+  // TODO: assert address is in range
+  Byte &Mem::operator[](DWord address)
   {
     return mData[address];
   }
