@@ -1,7 +1,7 @@
 #ifndef OPCODES_HPP
 #define OPCODES_HPP
 
-#include "common.hpp"
+#include "types.hpp"
 
 namespace Core
 {

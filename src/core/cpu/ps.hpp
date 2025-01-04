@@ -1,7 +1,7 @@
 #ifndef FLAGS_HPP
 #define FLAGS_HPP
 
-#include "common.hpp"
+#include "types.hpp"
 
 namespace Core
 {

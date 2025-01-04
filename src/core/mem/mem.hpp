@@ -1,7 +1,7 @@
 #ifndef MEM_HPP
 #define MEM_HPP
 
-#include "common.hpp"
+#include "types.hpp"
 
 namespace Core
 {

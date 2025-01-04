@@ -3,7 +3,7 @@
 
 #include "ps.hpp"
 #include "mem.hpp"
-#include "common.hpp"
+#include "types.hpp"
 
 namespace Core
 {
