@@ -139,4 +139,88 @@ namespace Core
     checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 4);
   }
+
+  TEST_F(LdaTest, LDAAbsoluteXCanLoadAValueIntoTheARegister)
+  {
+    CPU cpuCopy = mCpu;
+    Byte program[1024 * 64] = {0};
+
+    program[0xFFFC] = 0xBD;
+    program[0xFFFD] = 0x80;
+    program[0xFFFE] = 0x44;
+    program[0x4480] = 0x37;
+
+    mMem.load(program, sizeof(program));
+    mCpu.setX(0xFF);
+    SDWord cycles = mCpu.run(mMem, 4);
+
+    EXPECT_EQ(mCpu.getA(), 0x37);
+    EXPECT_FALSE(mCpu.getFlags().Z);
+    EXPECT_FALSE(mCpu.getFlags().N);
+    checkFlags(mCpu, cpuCopy);
+    EXPECT_EQ(cycles, 4);
+  }
+
+  TEST_F(LdaTest, LDAAbsoluteXCanLoadAValueIntoTheARegisterWhenItCrossesAPage)
+  {
+    CPU cpuCopy = mCpu;
+    Byte program[1024 * 64] = {0};
+
+    program[0xFFFC] = 0xBD;
+    program[0xFFFD] = 0x02;
+    program[0xFFFE] = 0x44;
+    program[0x4501] = 0x37;
+
+    mMem.load(program, sizeof(program));
+    mCpu.setX(0xFF);
+    SDWord cycles = mCpu.run(mMem, 5);
+
+    EXPECT_EQ(mCpu.getA(), 0x37);
+    EXPECT_FALSE(mCpu.getFlags().Z);
+    EXPECT_FALSE(mCpu.getFlags().N);
+    checkFlags(mCpu, cpuCopy);
+    EXPECT_EQ(cycles, 5);
+  }
+
+  TEST_F(LdaTest, LDAAbsoluteYCanLoadAValueIntoTheARegister)
+  {
+    CPU cpuCopy = mCpu;
+    Byte program[1024 * 64] = {0};
+
+    program[0xFFFC] = 0xB9;
+    program[0xFFFD] = 0x80;
+    program[0xFFFE] = 0x44;
+    program[0x4480] = 0x37;
+
+    mMem.load(program, sizeof(program));
+    mCpu.setX(0xFF);
+    SDWord cycles = mCpu.run(mMem, 4);
+
+    EXPECT_EQ(mCpu.getA(), 0x37);
+    EXPECT_FALSE(mCpu.getFlags().Z);
+    EXPECT_FALSE(mCpu.getFlags().N);
+    checkFlags(mCpu, cpuCopy);
+    EXPECT_EQ(cycles, 4);
+  }
+
+  TEST_F(LdaTest, LDAAbsoluteYCanLoadAValueIntoTheARegisterWhenItCrossesAPage)
+  {
+    CPU cpuCopy = mCpu;
+    Byte program[1024 * 64] = {0};
+
+    program[0xFFFC] = 0xB9;
+    program[0xFFFD] = 0x02;
+    program[0xFFFE] = 0x44;
+    program[0x4501] = 0x37;
+
+    mMem.load(program, sizeof(program));
+    mCpu.setX(0xFF);
+    SDWord cycles = mCpu.run(mMem, 5);
+
+    EXPECT_EQ(mCpu.getA(), 0x37);
+    EXPECT_FALSE(mCpu.getFlags().Z);
+    EXPECT_FALSE(mCpu.getFlags().N);
+    checkFlags(mCpu, cpuCopy);
+    EXPECT_EQ(cycles, 5);
+  }
 }
