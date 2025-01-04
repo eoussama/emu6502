@@ -22,7 +22,7 @@ namespace Core
     Mem mMem;
   };
 
-  TEST_F(CPUTest, Init)
+  TEST_F(CPUTest, CPUInitializesCorrectly)
   {
     EXPECT_EQ(mCpu.getA(), 0x00);
     EXPECT_EQ(mCpu.getX(), 0x00);
@@ -40,12 +40,31 @@ namespace Core
     EXPECT_FALSE(mCpu.getFlags().N);
   }
 
-  TEST_F(CPUTest, InvalidOpcode)
+  TEST_F(CPUTest, CPUThrowsAnErrorWhenWeRunAnInvalidOpcode)
   {
     Byte program[] = {0xFF};
-
     mMem.load(program, sizeof(program), 0xFFFC);
 
     EXPECT_THROW(mCpu.run(mMem, 1), InvalidOpCodeError);
+  }
+
+  TEST_F(CPUTest, CPUDoesNothingWhenWeRunZeroCycles)
+  {
+    CPU cpuCopy = mCpu;
+    SDWord cycles = mCpu.run(mMem, 0);
+
+    EXPECT_EQ(cycles, 0);
+    EXPECT_EQ(mCpu.getA(), cpuCopy.getA());
+    EXPECT_EQ(mCpu.getX(), cpuCopy.getX());
+    EXPECT_EQ(mCpu.getY(), cpuCopy.getY());
+    EXPECT_EQ(mCpu.getPC(), cpuCopy.getPC());
+    EXPECT_EQ(mCpu.getSP(), cpuCopy.getSP());
+    EXPECT_EQ(mCpu.getFlags().C, cpuCopy.getFlags().C);
+    EXPECT_EQ(mCpu.getFlags().Z, cpuCopy.getFlags().Z);
+    EXPECT_EQ(mCpu.getFlags().I, cpuCopy.getFlags().I);
+    EXPECT_EQ(mCpu.getFlags().D, cpuCopy.getFlags().D);
+    EXPECT_EQ(mCpu.getFlags().B, cpuCopy.getFlags().B);
+    EXPECT_EQ(mCpu.getFlags().V, cpuCopy.getFlags().V);
+    EXPECT_EQ(mCpu.getFlags().N, cpuCopy.getFlags().N);
   }
 }
