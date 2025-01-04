@@ -13,9 +13,11 @@ namespace Core
     CPU();
 
     void init();
-    void run(Mem& mem, Word cycles);
+    void run(Mem &mem, Word cycles);
 
   private:
+    Byte step(Mem &mem, Word &cycles);
+
     // Program Counter
     Word mPC;
 

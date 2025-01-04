@@ -12,9 +12,11 @@ namespace Core
 
     void init();
 
+    Byte operator[](DWord address) const;
+
   private:
     static constexpr DWord MAX_SIZE = 1024 * 64;
-    
+
     Byte mData[MAX_SIZE];
   };
 }

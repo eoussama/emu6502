@@ -1,5 +1,5 @@
 #include "cpu.hpp"
-
+#include <stdio.h>
 namespace Core
 {
   CPU::CPU()
@@ -23,7 +23,16 @@ namespace Core
   {
     while (cycles > 0)
     {
-      cycles--;
+      Byte ins = step(mem, cycles);
+      printf("%02X\n", ins);
     }
+  }
+
+  Byte CPU::step(Mem &mem, Word &cycles)
+  {
+    Byte data = mem[mPC++];
+    cycles--;
+
+    return data;
   }
 }

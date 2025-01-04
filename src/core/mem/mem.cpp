@@ -14,4 +14,10 @@ namespace Core
       mData[i] = 0;
     }
   }
+
+  // TODO: assert address is in range
+  Byte Mem::operator[](DWord address) const
+  {
+    return mData[address];
+  }
 }
