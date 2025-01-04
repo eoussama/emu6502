@@ -7,10 +7,7 @@ project(${PROJECT_NAME})
 include(${CMAKE_SOURCE_DIR}/version.cmake)
 
 include_directories(
-  ${PROJECT_SOURCE_DIR}/src/core
-  ${PROJECT_SOURCE_DIR}/src/core/mem
-  ${PROJECT_SOURCE_DIR}/src/core/cpu
-  ${PROJECT_SOURCE_DIR}/src/core/errors
+  ${PROJECT_SOURCE_DIR}/src
 )
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")

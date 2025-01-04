@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "cpu.hpp"
+#include "core/core.hpp"
 
 int main()
 {

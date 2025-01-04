@@ -1,6 +1,6 @@
 #include "cpu.hpp"
 #include "opcodes.hpp"
-#include "invalid_opcode.hpp"
+#include "../errors/invalid_opcode.hpp"
 
 namespace Core
 {

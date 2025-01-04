@@ -2,8 +2,8 @@
 #define CPU_HPP
 
 #include "ps.hpp"
-#include "mem.hpp"
-#include "types.hpp"
+#include "../mem/mem.hpp"
+#include "../common/types.hpp"
 
 namespace Core
 {
