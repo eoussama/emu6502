@@ -8,3 +8,9 @@ include(${CMAKE_SOURCE_DIR}/version.cmake)
 
 add_subdirectory(src/core)
 add_subdirectory(src/sandbox)
+
+option(ENABLE_TESTS "Enable building tests" ON)
+if (ENABLE_TESTS)
+  enable_testing()
+  add_subdirectory(test)
+endif()
