@@ -13,23 +13,24 @@ namespace Core
     CPU();
 
     void init();
+    void run(Mem& mem);
 
   private:
     // Program Counter
-    Word PC;
+    Word _pc;
 
     // Stack Pointer
-    Byte SP;
+    Byte _sp;
 
     // Accumulator
-    Byte A;
+    Byte _a;
 
     // X and Y registers
-    Byte X;
-    Byte Y;
+    Byte _x;
+    Byte _y;
 
     // Processor Status
-    PS Flags;
+    PS _flags;
   };
 }
 

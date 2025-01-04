@@ -9,13 +9,18 @@ namespace Core
 
   void CPU::init()
   {
-    A = 0;
-    X = 0;
-    Y = 0;
+    _a = 0;
+    _x = 0;
+    _y = 0;
 
-    SP = 0xFF;
-    PC = 0xFFFC;
+    _sp = 0xFF;
+    _pc = 0xFFFC;
 
-    Flags = PS();
+    _flags = PS();
+  }
+
+  void CPU::run(Mem& mem)
+  {
+    // TODO: Implement CPU
   }
 }
