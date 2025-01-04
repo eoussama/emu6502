@@ -19,7 +19,7 @@ int main()
   try
   {
     mem.load(program, sizeof(program));
-    cpu.run(mem, 9);
+    cpu.run(mem, 8);
   }
   catch (std::exception &e)
   {
