@@ -13,7 +13,7 @@ namespace Core
     CPU();
 
     void init();
-    void run(Mem &mem, Word cycles);
+    SDWord run(Mem &mem, Word cycles);
 
     Byte getA() const;
     Byte getX() const;

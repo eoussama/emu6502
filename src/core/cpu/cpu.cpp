@@ -21,8 +21,10 @@ namespace Core
     mFlags = PS();
   }
 
-  void CPU::run(Mem &mem, Word cycles)
+  SDWord CPU::run(Mem &mem, Word cycles)
   {
+    const SDWord initialCycles = cycles;
+
     while (cycles > 0)
     {
       Byte ins = stepByte(mem, cycles);
@@ -70,11 +72,13 @@ namespace Core
 
       default:
       {
-        // throw InvalidOpCodeError(ins);
+        throw InvalidOpCodeError(ins);
         break;
       }
       }
     }
+
+    return initialCycles - cycles;
   }
 
   Byte CPU::stepByte(Mem &mem, Word &cycles)
