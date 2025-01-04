@@ -55,7 +55,7 @@ namespace Core
     program[0x0047] = 0x37;
 
     mMem.load(program, sizeof(program));
-    mCpu.setA(5);
+    mCpu.setX(5);
     mCpu.run(mMem, 4);
 
     EXPECT_EQ(mCpu.getA(), 0x37);

@@ -115,4 +115,64 @@ namespace Core
     mFlags.Z = mA == 0;
     mFlags.N = mA & 0b10000000 > 0;
   }
+
+  PS CPU::getFlags() const
+  {
+    return mFlags;
+  }
+
+  Byte CPU::getA() const
+  {
+    return mA;
+  }
+
+  Byte CPU::getX() const
+  {
+    return mX;
+  }
+
+  Byte CPU::getY() const
+  {
+    return mY;
+  }
+
+  Word CPU::getPC() const
+  {
+    return mPC;
+  }
+
+  Byte CPU::getSP() const
+  {
+    return mSP;
+  }
+
+  void CPU::setA(Byte value)
+  {
+    mA = value;
+  }
+
+  void CPU::setX(Byte value)
+  {
+    mX = value;
+  }
+
+  void CPU::setY(Byte value)
+  {
+    mY = value;
+  }
+
+  void CPU::setPC(Word value)
+  {
+    mPC = value;
+  }
+
+  void CPU::setSP(Byte value)
+  {
+    mSP = value;
+  }
+
+  void CPU::setFlags(PS value)
+  {
+    mFlags = value;
+  }
 }

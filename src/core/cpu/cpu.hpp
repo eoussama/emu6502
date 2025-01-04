@@ -15,6 +15,20 @@ namespace Core
     void init();
     void run(Mem &mem, Word cycles);
 
+    Byte getA() const;
+    Byte getX() const;
+    Byte getY() const;
+    Word getPC() const;
+    Byte getSP() const;
+    PS getFlags() const;
+
+    void setA(Byte value);
+    void setX(Byte value);
+    void setY(Byte value);
+    void setPC(Word value);
+    void setSP(Byte value);
+    void setFlags(PS value);
+
   private:
     Word stepWord(Mem &mem, Word &cycles);
     Byte stepByte(Mem &mem, Word &cycles);
