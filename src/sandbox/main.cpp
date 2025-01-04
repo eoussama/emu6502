@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "core/core.hpp"
+#include "core/emu6502.hpp"
 
 int main()
 {
