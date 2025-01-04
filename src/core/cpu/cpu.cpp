@@ -59,12 +59,18 @@ namespace Core
 
       case OpCode::JSR:
       {
+        Word address = stepWord(mem, cycles);
+        writeWord(mem, cycles, mSP, mPC);
+
+        mPC = address;
+        cycles--;
+
         break;
       }
 
       default:
       {
-        throw InvalidOpCodeError(ins);
+        // throw InvalidOpCodeError(ins);
         break;
       }
       }
@@ -79,12 +85,29 @@ namespace Core
     return data;
   }
 
+  Word CPU::stepWord(Mem &mem, Word &cycles)
+  {
+    Word data = mem[mPC++];
+    data |= mem[mPC++] << 8;
+    cycles -= 2;
+
+    return data;
+  }
+
   Byte CPU::peek(Mem &mem, Word &cycles, Word address)
   {
     Byte data = mem[address];
     cycles--;
 
     return data;
+  }
+
+  void CPU::writeWord(Mem &mem, Word &cycles, Word address, Word data)
+  {
+    mem[address] = data & 0xFF;
+    mem[address + 1] = (data >> 8) & 0xFF;
+
+    cycles -= 2;
   }
 
   void CPU::setLDAStatus()
