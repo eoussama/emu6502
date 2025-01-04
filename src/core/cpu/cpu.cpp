@@ -64,6 +64,7 @@ namespace Core
         Word address = stepWord(mem, cycles);
         writeWord(mem, cycles, mSP, mPC);
 
+        mSP += 2;
         mPC = address;
         cycles--;
 
