@@ -41,6 +41,21 @@ namespace Core
 
     EXPECT_EQ(mCpu.getA(), 0x84);
     EXPECT_FALSE(mCpu.getFlags().Z);
+    EXPECT_TRUE(mCpu.getFlags().N);
+    checkFlags(mCpu, cpuCopy);
+    EXPECT_EQ(cycles, 2);
+  }
+
+  TEST_F(LdaTest, LDAImmediateCanLoadAZeroValueIntoTheARegister)
+  {
+    CPU cpuCopy = mCpu;
+    Byte program[] = {0xA9, 0x00};
+
+    mMem.load(program, sizeof(program), 0xFFFC);
+    SDWord cycles = mCpu.run(mMem, 2);
+
+    EXPECT_EQ(mCpu.getA(), 0x00);
+    EXPECT_TRUE(mCpu.getFlags().Z);
     EXPECT_FALSE(mCpu.getFlags().N);
     checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 2);
@@ -60,7 +75,7 @@ namespace Core
 
     EXPECT_EQ(mCpu.getA(), 0x37);
     EXPECT_FALSE(mCpu.getFlags().Z);
-    EXPECT_TRUE(mCpu.getFlags().N);
+    EXPECT_FALSE(mCpu.getFlags().N);
     checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 3);
   }
@@ -80,7 +95,7 @@ namespace Core
 
     EXPECT_EQ(mCpu.getA(), 0x37);
     EXPECT_FALSE(mCpu.getFlags().Z);
-    EXPECT_TRUE(mCpu.getFlags().N);
+    EXPECT_FALSE(mCpu.getFlags().N);
     checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 4);
   }
@@ -100,12 +115,12 @@ namespace Core
 
     EXPECT_EQ(mCpu.getA(), 0x37);
     EXPECT_FALSE(mCpu.getFlags().Z);
-    EXPECT_TRUE(mCpu.getFlags().N);
+    EXPECT_FALSE(mCpu.getFlags().N);
     checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 4);
   }
 
-  TEST_F(LdaTest, LDA_ABS)
+  TEST_F(LdaTest, LDAAbsoluteCanLoadAValueIntoTheARegister)
   {
     CPU cpuCopy = mCpu;
     Byte program[1024 * 64] = {0};
@@ -113,14 +128,14 @@ namespace Core
     program[0xFFFC] = 0xAD;
     program[0xFFFD] = 0x80;
     program[0xFFFE] = 0x44;
-    program[0x4480] = 0x01;
+    program[0x4480] = 0x37;
 
     mMem.load(program, sizeof(program));
     SDWord cycles = mCpu.run(mMem, 4);
 
-    EXPECT_EQ(mCpu.getA(), 0x01);
+    EXPECT_EQ(mCpu.getA(), 0x37);
     EXPECT_FALSE(mCpu.getFlags().Z);
-    EXPECT_TRUE(mCpu.getFlags().N);
+    EXPECT_FALSE(mCpu.getFlags().N);
     checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 4);
   }

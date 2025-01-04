@@ -128,7 +128,7 @@ namespace Core
   void CPU::setLDAStatus()
   {
     mFlags.Z = mA == 0;
-    mFlags.N = mA & 0b10000000 > 0;
+    mFlags.N = (mA & 0b10000000) > 0;
   }
 
   PS CPU::getFlags() const
