@@ -18,6 +18,15 @@ namespace Core
       mMem.init();
     }
 
+    void checkFlags(CPU &cpu, CPU &cpuCopy)
+    {
+      EXPECT_EQ(mCpu.getFlags().C, cpuCopy.getFlags().C);
+      EXPECT_EQ(mCpu.getFlags().V, cpuCopy.getFlags().V);
+      EXPECT_EQ(mCpu.getFlags().D, cpuCopy.getFlags().D);
+      EXPECT_EQ(mCpu.getFlags().I, cpuCopy.getFlags().I);
+      EXPECT_EQ(mCpu.getFlags().B, cpuCopy.getFlags().B);
+    }
+
     CPU mCpu;
     Mem mMem;
   };
@@ -33,11 +42,7 @@ namespace Core
     EXPECT_EQ(mCpu.getA(), 0x84);
     EXPECT_FALSE(mCpu.getFlags().Z);
     EXPECT_FALSE(mCpu.getFlags().N);
-    EXPECT_EQ(mCpu.getFlags().C, cpuCopy.getFlags().C);
-    EXPECT_EQ(mCpu.getFlags().V, cpuCopy.getFlags().V);
-    EXPECT_EQ(mCpu.getFlags().D, cpuCopy.getFlags().D);
-    EXPECT_EQ(mCpu.getFlags().I, cpuCopy.getFlags().I);
-    EXPECT_EQ(mCpu.getFlags().B, cpuCopy.getFlags().B);
+    checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 2);
   }
 
@@ -56,11 +61,7 @@ namespace Core
     EXPECT_EQ(mCpu.getA(), 0x37);
     EXPECT_FALSE(mCpu.getFlags().Z);
     EXPECT_TRUE(mCpu.getFlags().N);
-    EXPECT_EQ(mCpu.getFlags().C, cpuCopy.getFlags().C);
-    EXPECT_EQ(mCpu.getFlags().V, cpuCopy.getFlags().V);
-    EXPECT_EQ(mCpu.getFlags().D, cpuCopy.getFlags().D);
-    EXPECT_EQ(mCpu.getFlags().I, cpuCopy.getFlags().I);
-    EXPECT_EQ(mCpu.getFlags().B, cpuCopy.getFlags().B);
+    checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 3);
   }
 
@@ -80,11 +81,7 @@ namespace Core
     EXPECT_EQ(mCpu.getA(), 0x37);
     EXPECT_FALSE(mCpu.getFlags().Z);
     EXPECT_TRUE(mCpu.getFlags().N);
-    EXPECT_EQ(mCpu.getFlags().C, cpuCopy.getFlags().C);
-    EXPECT_EQ(mCpu.getFlags().V, cpuCopy.getFlags().V);
-    EXPECT_EQ(mCpu.getFlags().D, cpuCopy.getFlags().D);
-    EXPECT_EQ(mCpu.getFlags().I, cpuCopy.getFlags().I);
-    EXPECT_EQ(mCpu.getFlags().B, cpuCopy.getFlags().B);
+    checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 4);
   }
 
@@ -104,11 +101,7 @@ namespace Core
     EXPECT_EQ(mCpu.getA(), 0x37);
     EXPECT_FALSE(mCpu.getFlags().Z);
     EXPECT_TRUE(mCpu.getFlags().N);
-    EXPECT_EQ(mCpu.getFlags().C, cpuCopy.getFlags().C);
-    EXPECT_EQ(mCpu.getFlags().V, cpuCopy.getFlags().V);
-    EXPECT_EQ(mCpu.getFlags().D, cpuCopy.getFlags().D);
-    EXPECT_EQ(mCpu.getFlags().I, cpuCopy.getFlags().I);
-    EXPECT_EQ(mCpu.getFlags().B, cpuCopy.getFlags().B);
+    checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 4);
   }
 
@@ -128,11 +121,7 @@ namespace Core
     EXPECT_EQ(mCpu.getA(), 0x01);
     EXPECT_FALSE(mCpu.getFlags().Z);
     EXPECT_TRUE(mCpu.getFlags().N);
-    EXPECT_EQ(mCpu.getFlags().C, cpuCopy.getFlags().C);
-    EXPECT_EQ(mCpu.getFlags().V, cpuCopy.getFlags().V);
-    EXPECT_EQ(mCpu.getFlags().D, cpuCopy.getFlags().D);
-    EXPECT_EQ(mCpu.getFlags().I, cpuCopy.getFlags().I);
-    EXPECT_EQ(mCpu.getFlags().B, cpuCopy.getFlags().B);
+    checkFlags(mCpu, cpuCopy);
     EXPECT_EQ(cycles, 4);
   }
 }
