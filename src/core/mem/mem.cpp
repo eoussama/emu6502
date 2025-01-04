@@ -15,6 +15,17 @@ namespace Core
     }
   }
 
+  // TODO: assert data is in range
+  // TODO: assert size is in range
+  // TODO: assert offset is in range
+  void Mem::load(Byte *data, DWord size, DWord offset)
+  {
+    for (DWord i = 0; i < size; i++)
+    {
+      mData[i + offset] = data[i];
+    }
+  }
+
   // TODO: assert address is in range
   Byte Mem::operator[](DWord address) const
   {

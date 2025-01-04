@@ -11,6 +11,7 @@ namespace Core
     Mem();
 
     void init();
+    void load(Byte *data, DWord size, DWord offset);
 
     Byte operator[](DWord address) const;
 
