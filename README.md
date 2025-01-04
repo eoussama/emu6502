@@ -1,7 +1,7 @@
 # Emu 6502
 
 
-## Descriptuin
+## Description
 
 Barebone emulator for the 6502 micro-processor for personal needs.
 

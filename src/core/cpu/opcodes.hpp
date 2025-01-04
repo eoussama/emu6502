@@ -9,6 +9,7 @@ namespace Core
   {
     LDA_IM = 0xA9,
     LDA_ZP = 0xA5,
+    LDA_ZPX = 0xB5,
   };
 }
 

@@ -46,6 +46,17 @@ namespace Core
         break;
       }
 
+      case OpCode::LDA_ZPX:
+      {
+        Byte zpxAddress = step(mem, cycles);
+        Byte address = mX + zpxAddress;
+
+        mA = peek(mem, --cycles, address);
+        setLDAStatus();
+
+        break;
+      }
+
       default:
       {
         throw InvalidOpCodeError(ins);
