@@ -9,7 +9,7 @@ int main()
   Mem mem;
   CPU cpu;
 
-  cpu.run(mem);
+  cpu.run(mem, 2);
 
   return 0;
 }

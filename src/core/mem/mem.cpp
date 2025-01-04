@@ -11,7 +11,7 @@ namespace Core
   {
     for (DWord i = 0; i < MAX_SIZE; i++)
     {
-      data[i] = 0;
+      mData[i] = 0;
     }
   }
 }

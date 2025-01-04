@@ -13,7 +13,7 @@ namespace Core
     CPU();
 
     void init();
-    void run(Mem& mem);
+    void run(Mem& mem, Word cycles);
 
   private:
     // Program Counter

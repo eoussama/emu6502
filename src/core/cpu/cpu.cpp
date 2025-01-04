@@ -19,8 +19,11 @@ namespace Core
     mFlags = PS();
   }
 
-  void CPU::run(Mem& mem)
+  void CPU::run(Mem &mem, Word cycles)
   {
-    // TODO: Implement CPU
+    while (cycles > 0)
+    {
+      cycles--;
+    }
   }
 }

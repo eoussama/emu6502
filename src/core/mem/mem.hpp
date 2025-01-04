@@ -15,7 +15,7 @@ namespace Core
   private:
     static constexpr DWord MAX_SIZE = 1024 * 64;
     
-    Byte data[MAX_SIZE];
+    Byte mData[MAX_SIZE];
   };
 }
 
