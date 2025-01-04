@@ -59,6 +59,15 @@ namespace Core
         break;
       }
 
+      case OpCode::LDA_ABS:
+      {
+        Word address = stepWord(mem, cycles);
+        mA = peek(mem, cycles, address);
+        setLDAStatus();
+
+        break;
+      }
+
       case OpCode::JSR:
       {
         Word address = stepWord(mem, cycles);
