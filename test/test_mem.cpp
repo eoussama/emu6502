@@ -1,44 +1,51 @@
 #include <gtest/gtest.h>
-#include "core/mem/mem.hpp"
+#include "core/emu6502.hpp"
 
 namespace Core
 {
-
-  // Test 1: Check memory initialization
-  TEST(MemTest, Initialization)
+  class MemTest : public testing::Test
   {
-    Mem memory;
+  protected:
+    void SetUp() override
+    {
+      mMem.init();
+    }
 
+    void TearDown() override
+    {
+      mMem.init();
+    }
+
+    Mem mMem;
+  };
+
+  TEST_F(MemTest, Init)
+  {
     for (DWord i = 0; i < Mem::MAX_SIZE; ++i)
     {
-      EXPECT_EQ(memory[i], 0x00) << "Memory not initialized to zero at address: " << i;
+      EXPECT_EQ(mMem[i], 0x00) << "Memory not initialized to zero at address: " << i;
     }
   }
 
-  // Test 2: Check loading data into memory
-  TEST(MemTest, LoadData)
+  TEST_F(MemTest, Load)
   {
-    Mem memory;
-
     DWord offset = 0x10;
     Byte data[] = {0x42, 0x37, 0xAA};
     DWord size = sizeof(data) / sizeof(data[0]);
 
-    memory.load(data, size, offset);
+    mMem.load(data, size, offset);
 
     for (DWord i = 0; i < size; ++i)
     {
-      EXPECT_EQ(memory[offset + i], data[i]) << "Memory mismatch at address: " << (offset + i);
+      EXPECT_EQ(mMem[offset + i], data[i]) << "Memory mismatch at address: " << (offset + i);
     }
   }
 
-  // Test 3: Overwrite data in memory
-  TEST(MemTest, OverwriteData)
+  TEST_F(MemTest, Override)
   {
-    Mem memory;
     DWord address = 0x20;
-    memory[0x20] = 0x55;
+    mMem[0x20] = 0x55;
 
-    EXPECT_EQ(memory[address], 0x55) << "Data not overwritten correctly at address: " << address;
+    EXPECT_EQ(mMem[address], 0x55) << "Data not overwritten correctly at address: " << address;
   }
 }
