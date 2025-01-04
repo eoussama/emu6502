@@ -67,4 +67,13 @@ namespace Core
     EXPECT_EQ(mCpu.getFlags().V, cpuCopy.getFlags().V);
     EXPECT_EQ(mCpu.getFlags().N, cpuCopy.getFlags().N);
   }
+
+  TEST_F(CPUTest, CPUCanRunMoreCyclesThanRequestedIfRequired)
+  {
+    Byte program[] = {0xA9, 0x84};
+    mMem.load(program, sizeof(program), 0xFFFC);
+    SDWord cycles = mCpu.run(mMem, 1);
+
+    EXPECT_EQ(cycles, 2);
+  }
 }
