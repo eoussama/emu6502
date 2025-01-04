@@ -35,7 +35,13 @@ To run it, execute the following command:
 
 ## Test
 
-There are no tests at the moment.
+This project uses [Google Test](https://github.com/google/googletest) for testing.
+
+To run the tests, execute the following command:
+
+```bash
+./scripts/test.sh
+```
 
 ## License
 

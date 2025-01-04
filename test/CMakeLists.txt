@@ -7,7 +7,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_executable(example_test example.cpp)
-target_link_libraries(example_test PRIVATE core gtest gtest_main)
+add_executable(test_all test_mem.cpp)
+target_link_libraries(test_all PRIVATE core gtest gtest_main)
 
-add_test(NAME ExampleTest COMMAND example_test)
+add_test(NAME Emu6502Test COMMAND test_all)
