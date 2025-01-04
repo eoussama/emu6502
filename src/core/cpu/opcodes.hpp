@@ -7,7 +7,8 @@ namespace Core
 {
   enum OpCode
   {
-    LDA_IM = 0xA9
+    LDA_IM = 0xA9,
+    LDA_ZP = 0xA5,
   };
 }
 

@@ -17,6 +17,9 @@ namespace Core
 
   private:
     Byte step(Mem &mem, Word &cycles);
+    Byte peek(Mem &mem, Word &cycles, Word address);
+
+    void setLDAStatus();
 
     // Program Counter
     Word mPC;

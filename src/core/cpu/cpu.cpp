@@ -32,9 +32,16 @@ namespace Core
       case OpCode::LDA_IM:
       {
         mA = step(mem, cycles);
+        setLDAStatus();
 
-        mFlags.Z = mA == 0;
-        mFlags.N = mA & 0b10000000 > 0;
+        break;
+      }
+
+      case OpCode::LDA_ZP:
+      {
+        Byte zpAddress = step(mem, cycles);
+        mA = peek(mem, cycles, zpAddress);
+        setLDAStatus();
 
         break;
       }
@@ -54,5 +61,19 @@ namespace Core
     cycles--;
 
     return data;
+  }
+
+  Byte CPU::peek(Mem &mem, Word &cycles, Word address)
+  {
+    Byte data = mem[address];
+    cycles--;
+
+    return data;
+  }
+
+  void CPU::setLDAStatus()
+  {
+    mFlags.Z = mA == 0;
+    mFlags.N = mA & 0b10000000 > 0;
   }
 }

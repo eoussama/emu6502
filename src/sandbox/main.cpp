@@ -9,12 +9,15 @@ int main()
   CPU cpu;
   Mem mem;
 
-  Byte program[] = {0xA9, 0x04};
+  Byte program[1024 * 64] = {0};
+  program[0xFFFC] = 0xA5;
+  program[0xFFFD] = 0x42;
+  program[0x0042] = 0x84;
 
   try
   {
-    mem.load(program, sizeof(program), 0xFFFC);
-    cpu.run(mem, sizeof(program) / sizeof(Byte));
+    mem.load(program, sizeof(program));
+    cpu.run(mem, 3);
   }
   catch (std::exception &e)
   {
