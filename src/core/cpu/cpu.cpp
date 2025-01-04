@@ -21,7 +21,7 @@ namespace Core
     mFlags = PS();
   }
 
-  SDWord CPU::run(Mem &mem, Word cycles)
+  SDWord CPU::run(Mem &mem, SDWord cycles)
   {
     const SDWord initialCycles = cycles;
 
@@ -83,7 +83,7 @@ namespace Core
     return initialCycles - cycles;
   }
 
-  Byte CPU::stepByte(Mem &mem, Word &cycles)
+  Byte CPU::stepByte(Mem &mem, SDWord &cycles)
   {
     Byte data = mem[mPC++];
     cycles--;
@@ -91,7 +91,7 @@ namespace Core
     return data;
   }
 
-  Word CPU::stepWord(Mem &mem, Word &cycles)
+  Word CPU::stepWord(Mem &mem, SDWord &cycles)
   {
     Word data = mem[mPC++];
     data |= mem[mPC++] << 8;
@@ -100,7 +100,7 @@ namespace Core
     return data;
   }
 
-  Byte CPU::peek(Mem &mem, Word &cycles, Word address)
+  Byte CPU::peek(Mem &mem, SDWord &cycles, Word address)
   {
     Byte data = mem[address];
     cycles--;
@@ -108,7 +108,7 @@ namespace Core
     return data;
   }
 
-  void CPU::writeWord(Mem &mem, Word &cycles, Word address, Word data)
+  void CPU::writeWord(Mem &mem, SDWord &cycles, Word address, Word data)
   {
     mem[address] = data & 0xFF;
     mem[address + 1] = (data >> 8) & 0xFF;

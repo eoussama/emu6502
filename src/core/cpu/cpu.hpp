@@ -13,7 +13,7 @@ namespace Core
     CPU();
 
     void init();
-    SDWord run(Mem &mem, Word cycles);
+    SDWord run(Mem &mem, SDWord cycles);
 
     Byte getA() const;
     Byte getX() const;
@@ -30,11 +30,11 @@ namespace Core
     void setFlags(PS value);
 
   private:
-    Word stepWord(Mem &mem, Word &cycles);
-    Byte stepByte(Mem &mem, Word &cycles);
-    Byte peek(Mem &mem, Word &cycles, Word address);
+    Word stepWord(Mem &mem, SDWord &cycles);
+    Byte stepByte(Mem &mem, SDWord &cycles);
+    Byte peek(Mem &mem, SDWord &cycles, Word address);
 
-    void writeWord(Mem &mem, Word &cycles, Word address, Word data);
+    void writeWord(Mem &mem, SDWord &cycles, Word address, Word data);
 
     void setLDAStatus();
 
