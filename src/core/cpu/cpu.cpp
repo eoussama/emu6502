@@ -66,6 +66,7 @@ namespace Core
 
         mSP += 2;
         mPC = address;
+
         cycles--;
 
         break;
@@ -73,7 +74,7 @@ namespace Core
 
       default:
       {
-        throw InvalidOpCodeError(ins);
+        throw InvalidOpCodeError(mPC, ins);
         break;
       }
       }

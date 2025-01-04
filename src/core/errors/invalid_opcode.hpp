@@ -11,13 +11,15 @@ namespace Core
   class InvalidOpCodeError : public std::runtime_error
   {
   public:
-    InvalidOpCodeError(const Byte opcode) : std::runtime_error(formatMessage(opcode)) {}
+    InvalidOpCodeError(const Word address, const Byte opcode) : std::runtime_error(formatMessage(address, opcode)) {}
 
   private:
-    static std::string formatMessage(const Byte opcode)
+    static std::string formatMessage(const Word address, const Byte opcode)
     {
       std::ostringstream error;
-      error << "Unknown OpCode: 0x" << std::hex << std::uppercase << static_cast<int>(opcode);
+      error << "Unknown OpCode: 0x"
+            << std::hex << std::uppercase << static_cast<int>(opcode)
+            << " at address: 0x" << std::hex << std::uppercase << static_cast<int>(address);
 
       return error.str();
     }
