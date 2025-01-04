@@ -30,8 +30,8 @@ namespace Core
     void setFlags(PS value);
 
   private:
-    Word stepWord(Mem &mem, SDWord &cycles);
     Byte stepByte(Mem &mem, SDWord &cycles);
+    Word stepWord(Mem &mem, SDWord &cycles);
     Byte peek(Mem &mem, SDWord &cycles, Word address);
 
     void writeWord(Mem &mem, SDWord &cycles, Word address, Word data);

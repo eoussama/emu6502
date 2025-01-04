@@ -148,10 +148,10 @@ namespace Core
     program[0xFFFC] = 0xBD;
     program[0xFFFD] = 0x80;
     program[0xFFFE] = 0x44;
-    program[0x4480] = 0x37;
+    program[0x4481] = 0x37;
 
     mMem.load(program, sizeof(program));
-    mCpu.setX(0xFF);
+    mCpu.setX(0x01);
     SDWord cycles = mCpu.run(mMem, 4);
 
     EXPECT_EQ(mCpu.getA(), 0x37);
@@ -161,7 +161,7 @@ namespace Core
     EXPECT_EQ(cycles, 4);
   }
 
-  TEST_F(LdaTest, LDAAbsoluteXCanLoadAValueIntoTheARegisterWhenItCrossesAPage)
+  TEST_F(LdaTest, LDAAbsoluteXCanLoadAValueIntoTheARegisterWhenItCrossesAPageBoundary)
   {
     CPU cpuCopy = mCpu;
     Byte program[1024 * 64] = {0};
@@ -190,10 +190,10 @@ namespace Core
     program[0xFFFC] = 0xB9;
     program[0xFFFD] = 0x80;
     program[0xFFFE] = 0x44;
-    program[0x4480] = 0x37;
+    program[0x4481] = 0x37;
 
     mMem.load(program, sizeof(program));
-    mCpu.setY(0xFF);
+    mCpu.setY(0x01);
     SDWord cycles = mCpu.run(mMem, 4);
 
     EXPECT_EQ(mCpu.getA(), 0x37);
@@ -203,7 +203,7 @@ namespace Core
     EXPECT_EQ(cycles, 4);
   }
 
-  TEST_F(LdaTest, LDAAbsoluteYCanLoadAValueIntoTheARegisterWhenItCrossesAPage)
+  TEST_F(LdaTest, LDAAbsoluteYCanLoadAValueIntoTheARegisterWhenItCrossesAPageBoundary)
   {
     CPU cpuCopy = mCpu;
     Byte program[1024 * 64] = {0};
@@ -268,7 +268,7 @@ namespace Core
     EXPECT_EQ(cycles, 5);
   }
 
-  TEST_F(LdaTest, LDAIndirectYCanLoadAValueIntoTheARegisterWhenItCrossesAPage)
+  TEST_F(LdaTest, LDAIndirectYCanLoadAValueIntoTheARegisterWhenItCrossesAPageBoundary)
   {
     CPU cpuCopy = mCpu;
     Byte program[1024 * 64] = {0};

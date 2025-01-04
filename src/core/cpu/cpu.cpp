@@ -68,6 +68,40 @@ namespace Core
         break;
       }
 
+      case OpCode::LDA_ABSX:
+      {
+        Word address = stepWord(mem, cycles);
+        Word absAddressX = address + mX;
+
+        mA = peek(mem, cycles, absAddressX);
+
+        if (absAddressX - address >= 0xFF)
+        {
+          cycles--;
+        }
+
+        setLDAStatus();
+
+        break;
+      }
+
+      case OpCode::LDA_ABSY:
+      {
+        Word address = stepWord(mem, cycles);
+        Word absAddressY = address + mY;
+
+        mA = peek(mem, cycles, absAddressY);
+
+        if (absAddressY - address >= 0xFF)
+        {
+          cycles--;
+        }
+
+        setLDAStatus();
+
+        break;
+      }
+
       case OpCode::JSR:
       {
         Word address = stepWord(mem, cycles);
