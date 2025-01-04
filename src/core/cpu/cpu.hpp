@@ -17,20 +17,20 @@ namespace Core
 
   private:
     // Program Counter
-    Word _pc;
+    Word mPC;
 
     // Stack Pointer
-    Byte _sp;
+    Byte mSP;
 
     // Accumulator
-    Byte _a;
+    Byte mA;
 
     // X and Y registers
-    Byte _x;
-    Byte _y;
+    Byte mX;
+    Byte mY;
 
     // Processor Status
-    PS _flags;
+    PS mFlags;
   };
 }
 

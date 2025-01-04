@@ -9,14 +9,14 @@ namespace Core
 
   void CPU::init()
   {
-    _a = 0;
-    _x = 0;
-    _y = 0;
+    mA = 0;
+    mX = 0;
+    mY = 0;
 
-    _sp = 0xFF;
-    _pc = 0xFFFC;
+    mSP = 0xFF;
+    mPC = 0xFFFC;
 
-    _flags = PS();
+    mFlags = PS();
   }
 
   void CPU::run(Mem& mem)
