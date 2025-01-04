@@ -9,10 +9,17 @@ int main()
   CPU cpu;
   Mem mem;
 
-  Byte program[] = {0xA9, 0x03};
+  Byte program[] = {0xA9, 0x04};
 
-  mem.load(program, sizeof(program), 0xFFFC);
-  cpu.run(mem, sizeof(program) / sizeof(Byte));
+  try
+  {
+    mem.load(program, sizeof(program), 0xFFFC);
+    cpu.run(mem, sizeof(program) / sizeof(Byte));
+  }
+  catch (std::exception &e)
+  {
+    std::cerr << "[Error] " << e.what() << std::endl;
+  }
 
   return 0;
 }

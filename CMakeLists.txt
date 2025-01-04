@@ -10,6 +10,7 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/src/core
   ${PROJECT_SOURCE_DIR}/src/core/mem
   ${PROJECT_SOURCE_DIR}/src/core/cpu
+  ${PROJECT_SOURCE_DIR}/src/core/errors
 )
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")

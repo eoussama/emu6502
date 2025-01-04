@@ -1,7 +1,6 @@
 #include "cpu.hpp"
 #include "opcodes.hpp"
-
-#include <iostream>
+#include "invalid_opcode.hpp"
 
 namespace Core
 {
@@ -26,7 +25,6 @@ namespace Core
   {
     while (cycles > 0)
     {
-      std::cout << "Cycles: " << cycles << std::endl;
       Byte ins = step(mem, cycles);
 
       switch (ins)
@@ -38,6 +36,12 @@ namespace Core
         mFlags.Z = mA == 0;
         mFlags.N = mA & 0b10000000 > 0;
 
+        break;
+      }
+
+      default:
+      {
+        throw InvalidOpCodeError(ins);
         break;
       }
       }
