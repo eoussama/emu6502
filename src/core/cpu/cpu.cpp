@@ -42,7 +42,7 @@ namespace Core
       case OpCode::LDA_ZP:
       {
         Byte zpAddress = stepByte(mem, cycles);
-        mA = peek(mem, cycles, zpAddress);
+        mA = peekByte(mem, cycles, zpAddress);
         setLDAStatus();
 
         break;
@@ -53,7 +53,7 @@ namespace Core
         Byte zpxAddress = stepByte(mem, cycles);
         Byte address = mX + zpxAddress;
 
-        mA = peek(mem, --cycles, address);
+        mA = peekByte(mem, --cycles, address);
         setLDAStatus();
 
         break;
@@ -62,7 +62,7 @@ namespace Core
       case OpCode::LDA_ABS:
       {
         Word address = stepWord(mem, cycles);
-        mA = peek(mem, cycles, address);
+        mA = peekByte(mem, cycles, address);
         setLDAStatus();
 
         break;
@@ -73,7 +73,7 @@ namespace Core
         Word address = stepWord(mem, cycles);
         Word absAddressX = address + mX;
 
-        mA = peek(mem, cycles, absAddressX);
+        mA = peekByte(mem, cycles, absAddressX);
 
         if (absAddressX - address >= 0xFF)
         {
@@ -90,10 +90,39 @@ namespace Core
         Word address = stepWord(mem, cycles);
         Word absAddressY = address + mY;
 
-        mA = peek(mem, cycles, absAddressY);
+        mA = peekByte(mem, cycles, absAddressY);
 
         if (absAddressY - address >= 0xFF)
         {
+          cycles--;
+        }
+
+        setLDAStatus();
+
+        break;
+      }
+
+      case OpCode::LDA_INDX:
+      {
+        Byte value = stepByte(mem, cycles);
+        Byte zpAddress = value + mX;
+        Word address = peekWord(mem, --cycles, zpAddress);
+
+        mA = peekByte(mem, cycles, address);
+        setLDAStatus();
+
+        break;
+      }
+
+      case OpCode::LDA_INDY:
+      {
+        Byte zpAddress = stepByte(mem, cycles);
+        Word effectiveAddress = peekWord(mem, cycles, zpAddress);
+        Word address = effectiveAddress + mY;
+        
+        mA = peekByte(mem, cycles, address);
+
+        if (address - effectiveAddress >= 0xFF) {
           cycles--;
         }
 
@@ -143,10 +172,19 @@ namespace Core
     return data;
   }
 
-  Byte CPU::peek(Mem &mem, SDWord &cycles, Word address)
+  Byte CPU::peekByte(Mem &mem, SDWord &cycles, Word address)
   {
     Byte data = mem[address];
     cycles--;
+
+    return data;
+  }
+
+  Word CPU::peekWord(Mem &mem, SDWord &cycles, Word address)
+  {
+    Byte lowByte = peekByte(mem, cycles, address);
+    Byte highByte = peekByte(mem, cycles, address + 1);
+    Word data = (highByte << 8) | lowByte;
 
     return data;
   }

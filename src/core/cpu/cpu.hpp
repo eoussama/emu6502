@@ -32,7 +32,9 @@ namespace Core
   private:
     Byte stepByte(Mem &mem, SDWord &cycles);
     Word stepWord(Mem &mem, SDWord &cycles);
-    Byte peek(Mem &mem, SDWord &cycles, Word address);
+
+    Byte peekByte(Mem &mem, SDWord &cycles, Word address);
+    Word peekWord(Mem &mem, SDWord &cycles, Word address);
 
     void writeWord(Mem &mem, SDWord &cycles, Word address, Word data);
 
