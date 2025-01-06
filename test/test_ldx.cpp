@@ -31,7 +31,7 @@ namespace Core
     Mem mMem;
   };
 
-  TEST_F(LdxTest, LDXImmediateCanLoadAValueIntoTheARegister)
+  TEST_F(LdxTest, LDXImmediateCanLoadAValueIntoTheXRegister)
   {
     CPU cpuCopy = mCpu;
     Byte program[] = {0xA2, 0x84};
