@@ -31,5 +31,18 @@ namespace Core
     Mem mMem;
   };
 
-  
+  TEST_F(LdxTest, LDXImmediateCanLoadAValueIntoTheARegister)
+  {
+    CPU cpuCopy = mCpu;
+    Byte program[] = {0xA2, 0x84};
+
+    mMem.load(program, sizeof(program), 0xFFFC);
+    SDWord cycles = mCpu.run(mMem, 2);
+
+    EXPECT_EQ(mCpu.getX(), 0x84);
+    EXPECT_FALSE(mCpu.getFlags().Z);
+    EXPECT_TRUE(mCpu.getFlags().N);
+    checkFlags(mCpu, cpuCopy);
+    EXPECT_EQ(cycles, 2);
+  }
 }
