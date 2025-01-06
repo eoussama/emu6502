@@ -119,14 +119,23 @@ namespace Core
         Byte zpAddress = stepByte(mem, cycles);
         Word effectiveAddress = peekWord(mem, cycles, zpAddress);
         Word address = effectiveAddress + mY;
-        
+
         mA = peekByte(mem, cycles, address);
 
-        if (address - effectiveAddress >= 0xFF) {
+        if (address - effectiveAddress >= 0xFF)
+        {
           cycles--;
         }
 
         setLDAStatus();
+
+        break;
+      }
+
+      case OpCode::LDX_IM:
+      {
+        mX = stepByte(mem, cycles);
+        setLDXStatus();
 
         break;
       }
@@ -201,6 +210,12 @@ namespace Core
   {
     mFlags.Z = mA == 0;
     mFlags.N = (mA & 0b10000000) > 0;
+  }
+
+  void CPU::setLDXStatus()
+  {
+    mFlags.Z = mX == 0;
+    mFlags.N = (mX & 0b10000000) > 0;
   }
 
   PS CPU::getFlags() const

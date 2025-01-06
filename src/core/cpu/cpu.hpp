@@ -39,6 +39,7 @@ namespace Core
     void writeWord(Mem &mem, SDWord &cycles, Word address, Word data);
 
     void setLDAStatus();
+    void setLDXStatus();
 
     // Program Counter
     Word mPC;
