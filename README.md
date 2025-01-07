@@ -1,5 +1,4 @@
-# Emu 6502
-
+# Emu6502
 
 ## Description
 
